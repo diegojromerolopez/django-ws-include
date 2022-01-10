@@ -7,7 +7,26 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/maintainability)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/test_coverage)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/test_coverage)
 
-Include your templates asynchronously and load their contents using websockets.
+Include your templates asynchronously and load their contents using websockets
+in [Django](https://www.djangoproject.com/).
+
+## How does this work?
+
+This library includes javascript code in the **ws_include** template_tag.
+
+That javascript code opens a websocket connection (WS_INCLUDE_WEBSOCKET)
+that sends a websocket message including the encrypted query and the block ID of
+the template that must be loaded asynchronously.
+
+Later, the server responds with the rendered template and the corresponding block ID.
+The javascript code uses the block ID to identify were to include the rendered template.
+
+This project is an optimization of
+[django-async-include](https://github.com/diegojromerolopez/django-async-include/),
+project that while has the same philosophy, it uses HTTP requests to get the
+rendered templates, so it is less efficient than using a lone websocket connection.
+You are encouraged to take a look to that project to help you understand the aim
+of this project.
 
 ## Installation
 
@@ -134,7 +153,8 @@ Customize the wrapper class by passing **html__tag__class** optional parameter t
 ```
 
 ## TODO
-* Tests
+* Tests.
+* Improve documentation.
 
 ## Main author
 Diego J. Romero-López is a Software Engineer based on Madrid (Spain).
