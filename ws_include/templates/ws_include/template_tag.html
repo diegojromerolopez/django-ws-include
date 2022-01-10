@@ -1,0 +1,9 @@
+<script id="script_{{block_id}}" type="text/javascript">
+    {% include 'ws_include/template_tag.js' %}
+</script>
+
+<{{html__tag}} id="{{block_id}}" class="ws_included-block {{html__tag__class}}" data-request-function="ws__{{block_id}}">
+    {% if spinner__visible %}
+        {% include spinner__template_path %}
+    {% endif %}
+</{{html__tag}}>
