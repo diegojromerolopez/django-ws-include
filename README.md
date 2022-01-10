@@ -30,11 +30,11 @@ of this project.
 
 ## Installation
 
-This package is **not** in pypi yet. Please, install it from the **main** repo while it is developed.
-It will be uploaded to pypi when it reaches the beta version.
+[This package is in pypi](https://pypi.org/project/django-ws-include/).
+Use pip to install it:
 
 ```shell
-pip install https://github.com/diegojromerolopez/django-ws-include/archive/main.zip
+pip install django-ws-include
 ```
 
 ### Installation in your Django project

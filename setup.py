@@ -7,7 +7,7 @@ long_description = open(os.path.join(root_dir_path, "README.md")).read()
 
 setup(
     name="django-ws-include",
-    version="0.1.0",
+    version="0.1.1",
     author="Diego J. Romero López",
     author_email="diegojromerolopez@gmail.com",
     description=(
