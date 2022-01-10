@@ -9,10 +9,11 @@ Include your templates asynchronously and load their contents using websockets.
 
 ## Installation
 
-[This package is in pypi](https://pypi.python.org/pypi/django-ws-include) so you only have to write:
+This package is **not** in pypi yet. Please, install it from the **main** repo while it is developed.
+It will be uploaded to pypi when it reaches the beta version.
 
-```sh
-pip install django-ws-include
+```shell
+pip install https://github.com/diegojromerolopez/django-ws-include/archive/main.zip
 ```
 
 ### Installation in your Django project
