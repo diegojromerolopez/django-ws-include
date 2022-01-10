@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 root_dir_path = os.path.dirname(os.path.abspath(__file__))
 long_description = open(os.path.join(root_dir_path, "README.md")).read()
-templates_dir = os.path.join(root_dir_path, 'ws_include', 'templates')
+templates_dir_relative_path = './ws_include/templates'
 
 data_files = []
 for dirpath, dirnames, filenames in os.walk("."):
@@ -50,10 +50,10 @@ setup(
     packages=find_packages(),
     data_files=[
         (
-            templates_dir, (
-                os.path.join(templates_dir, "ws_include/spinner.html"),
-                os.path.join(templates_dir, "ws_include/template_tag.html"),
-                os.path.join(templates_dir, "ws_include/template_tag.html")
+            templates_dir_relative_path, (
+                os.path.join(templates_dir_relative_path, "ws_include/spinner.html"),
+                os.path.join(templates_dir_relative_path, "ws_include/template_tag.html"),
+                os.path.join(templates_dir_relative_path, "ws_include/template_tag.html")
             )
         )
     ],
