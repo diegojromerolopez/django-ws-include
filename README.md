@@ -4,6 +4,8 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/diegojromerolopez/django-ws-include/graphs/commit-activity)
 [![stability-alpha](https://img.shields.io/badge/stability-alpha-f4d03f.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#alpha)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![Maintainability](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/maintainability)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/test_coverage)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/test_coverage)
 
 Include your templates asynchronously and load their contents using websockets.
 
