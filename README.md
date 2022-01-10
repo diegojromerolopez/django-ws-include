@@ -2,13 +2,12 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/diegojromerolopez/django-ws-include/graphs/commit-activity)
+[![stability-alpha](https://img.shields.io/badge/stability-alpha-f4d03f.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#alpha)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 
 Include your templates asynchronously and load their contents using websockets.
 
-# Installation
-
-## Using pip
+## Installation
 
 [This package is in pypi](https://pypi.python.org/pypi/django-ws-include) so you only have to write:
 
@@ -16,7 +15,7 @@ Include your templates asynchronously and load their contents using websockets.
 pip install django-ws-include
 ```
 
-## Installation in your Django project
+### Installation in your Django project
 
 Include channels and ws_include in your project's **settings.py**:
 
@@ -30,7 +29,7 @@ INSTALLED_APPS = [
 
 ```
 
-## Create asgi.py file with django-ws-include routes
+### Create asgi.py file with django-ws-include routes
 
 ```python
 import os
@@ -53,7 +52,7 @@ application = ProtocolTypeRouter({
 
 ```
 
-# Use
+## Use
 
 Load the **ws_include** template tags at the top of your file and use the **ws_include**
 template tag as a replacement of the django include template tag.
@@ -73,7 +72,7 @@ need in your included template as named parameters of the **ws_include** templat
 There is also a repository with a full example that also uses django-async-include:
 [django-async-include-example](https://github.com/diegojromerolopez/django-async-include-example).
 
-## Warning and limitations
+### Warning and limitations
 See [django-async-include](https://github.com/diegojromerolopez/django-async-include) warnings and limitations.
 
 ## Examples
@@ -99,47 +98,9 @@ See [django-async-include](https://github.com/diegojromerolopez/django-async-inc
 {% ws_include "boards/components/view/summary.html" board=board member=member next_due_date_cards=next_due_date_cards %}
 ```
 
-# Customization
+## Customization
 
-## Spinner
-
-Overwrite **async_include/spinner.html** template if you want to change the spinner from fontawesome
-one (default) by a background image or an image. Otherwise, make sure you are loading fontawesome fonts.
-
-Note that the spinner must have class **async_included-spinner**. Otherwise, the spinner behavior
-is going to be unpredictable.
-
-### Show/Hide spinner
-
-Including the optional parameter **spinner__visible=False** when calling the ws_include template tag
-will not show the spinner block.
-
-```html
-{% load ws_include %}
-
-{# .. #}
-
-{# Will not show the spinner #}
-{% ws_include "boards/components/view/last_comments.html" board=board spinner__visible=False %}
-```
-
-### Customize spinner template per ws_include template tag call
-
-Use the optional parameter **spinner__template_path** to set a different template path for a
-specific ws_include call in your templates.
-
-```html
-{% load ws_include %}
-
-{# .. #}
-
-{# Will not show the spinner #}
-{% ws_include "boards/components/view/last_comments.html" board=board spinner__template_path="templates/comments/last_comments_spinner.html" %}
-```
-
-Remember the spinner tag should contain the **ws_included-spinner** class.
-
-## Block wrapper html tag
+### Block wrapper html tag
 
 Wrapper tag is **div** and maybe you don't want that. Set **html__tag** optional parameter to the name of
 the tag you need in that particular context.
@@ -155,7 +116,7 @@ Example:
 {% ws_include "boards/components/view/last_comments.html" board=board html__tag='li' %}
 ```
 
-## Block wrapper html tag class
+### Block wrapper html tag class
 
 Customize the wrapper class by passing **html__tag__class** optional parameter to the template tag.
 
@@ -169,10 +130,10 @@ Customize the wrapper class by passing **html__tag__class** optional parameter t
 {% ws_include "boards/components/view/last_comments.html" board=board html__tag='li' html__tag__class='last_comments' %}
 ```
 
-# TODO
+## TODO
 * Tests
 
-# Main author
+## Main author
 Diego J. Romero-López is a Software Engineer based on Madrid (Spain).
 
 This project is in no way endorsed or related in any way to my past or current employers.
