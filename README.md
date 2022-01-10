@@ -10,6 +10,8 @@
 Include your templates asynchronously and load their contents using websockets
 in [Django](https://www.djangoproject.com/).
 
+[See this library in github](https://github.com/diegojromerolopez/django-ws-include).
+
 ## How does this work?
 
 This library includes javascript code in the **ws_include** template_tag.
