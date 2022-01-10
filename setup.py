@@ -4,7 +4,6 @@ from setuptools import setup, find_packages
 
 root_dir_path = os.path.dirname(os.path.abspath(__file__))
 long_description = open(os.path.join(root_dir_path, "README.md")).read()
-templates_dir_relative_path = './ws_include/templates'
 
 setup(
     name="django-ws-include",
@@ -13,7 +12,8 @@ setup(
     author_email="diegojromerolopez@gmail.com",
     description=(
         "A simple application for Django to include " +
-        "(and fetch) asynchronous templates by loading templates with websocket connections."
+        "(and fetch) asynchronous templates by loading " +
+        "templates with websocket connections."
     ),
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -37,14 +37,5 @@ setup(
     keywords="django template asynchronous template_tag websockets",
     url="https://github.com/diegojromerolopez/django-ws-include",
     packages=find_packages(),
-    data_files=[
-        (
-            templates_dir_relative_path, (
-                os.path.join(templates_dir_relative_path, "ws_include/spinner.html"),
-                os.path.join(templates_dir_relative_path, "ws_include/template_tag.html"),
-                os.path.join(templates_dir_relative_path, "ws_include/template_tag.js")
-            )
-        )
-    ],
     include_package_data=True,
 )

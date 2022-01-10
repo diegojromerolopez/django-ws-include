@@ -1,0 +1,2 @@
+include README.md
+recursive-include ws_include/templates *
