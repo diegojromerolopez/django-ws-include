@@ -4,7 +4,6 @@ import jsonpickle
 from channels.generic.websocket import WebsocketConsumer
 from django.apps import apps
 from django.conf import settings
-from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.utils import translation
 
@@ -56,15 +55,14 @@ class TemplateGetter(WebsocketConsumer):
                         context_object_load_params['__checksum__'] !=
                         checksum.make(model_object_as_str)
                 ):
-                    return HttpResponse(
-                        status=403,
-                        content='JSON tampering detected when loading object',
-                        content_type='text/plain'
+                    raise ValueError(
+                        'JSON tampering detected when loading object'
                     )
 
                 replacements[context_object_name] = model_object
 
-            # If the value is a QuerySet we include it in the template replacements
+            # If the value is a QuerySet we include it in
+            # the template replacements
             elif object_type == 'QuerySet':
                 # Loading the model
                 app_name = context_object_load_params['app_name']
@@ -100,13 +98,11 @@ class TemplateGetter(WebsocketConsumer):
                         context_object_load_params['__checksum__'] !=
                         checksum.make(value_as_str)
                 ):
-                    return HttpResponse(
-                        status=403,
-                        content='JSON tampering detected when loading safe value '
-                                'for attribute \'{0}\'. Value: \'{1}\''.format(
+                    raise ValueError(
+                        'JSON tampering detected when loading safe value ' +
+                        'for attribute \'{0}\'. Value: \'{1}\''.format(
                             context_object_name, value_as_str
-                        ),
-                        content_type='text/plain'
+                        )
                     )
 
                 # Including the safe value as a replacement

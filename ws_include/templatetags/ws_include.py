@@ -10,7 +10,7 @@ from django.conf import settings
 from django import template
 from django.contrib.contenttypes.models import ContentType
 from django.db.models.query import QuerySet
-from django.template import loader, Context
+from django.template import loader
 from django.utils.text import slugify
 from django.utils.translation import get_language
 
