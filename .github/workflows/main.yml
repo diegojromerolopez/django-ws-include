@@ -26,3 +26,13 @@ jobs:
       - name: Test with unittest
         run: |
           python -m unittest discover -s ./ws_include/tests
+      - name: Generate the coverage report
+        run: |
+          coverage run --source=ws_include/tests -m unittest
+          coverage xml -o coverage.xml
+      - name: Publish code coverage to code climate
+        uses: paambaati/codeclimate-action@v2.7.5
+        env:
+          CC_TEST_REPORTER_ID: ${{secrets.CC_TEST_REPORTER_ID}}
+        with:
+          coverageCommand: coverage report
