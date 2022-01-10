@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", function(event) {
 
     // Common code
-    if(typeof(WS_INCLUDE_WEBSOCKET) === 'undefined'){
-        WS_INCLUDE_WEBSOCKET = new WebSocket('ws://' + window.location.host + '/ws/ws_include/');
+    if(typeof(WS_INCLUDE_WEBSOCKET) === "undefined"){
+        WS_INCLUDE_WEBSOCKET = new WebSocket("ws://" + window.location.host + "/ws/ws_include/");
 
         // When a message is received, replace block content with the HTML
-        WS_INCLUDE_WEBSOCKET.addEventListener('message', event => {
+        WS_INCLUDE_WEBSOCKET.addEventListener("message", event => {
             const wsJsonResponse = JSON.parse(event.data);
-            const blockId = wsJsonResponse['blockId'];
+            const blockId = wsJsonResponse["blockId"];
             const scriptBlockId = `script_${blockId}`;
             document.getElementById(scriptBlockId).remove();
-            document.getElementById(blockId).innerHTML = wsJsonResponse['html'];
+            document.getElementById(blockId).innerHTML = wsJsonResponse["html"];
         });
     }
 
     // Send a message for each block once the websocket is open
-    WS_INCLUDE_WEBSOCKET.addEventListener('open', event => {
+    WS_INCLUDE_WEBSOCKET.addEventListener("open", event => {
         const blockId = "{{block_id}}";
         const context = {{context|safe}};
         const wsRequest = JSON.stringify({
