@@ -61,3 +61,5 @@ MIDDLEWARE_CLASSES = (
     'crequest.middleware.CrequestMiddleware',
     'cuser.middleware.CuserMiddleware'
 )
+
+USE_TZ = False
