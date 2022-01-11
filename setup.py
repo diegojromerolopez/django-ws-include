@@ -7,7 +7,7 @@ long_description = open(os.path.join(root_dir_path, "README.md")).read()
 
 setup(
     name="django-ws-include",
-    version="0.1.1",
+    version="0.1.2",
     author="Diego J. Romero López",
     author_email="diegojromerolopez@gmail.com",
     description=(
@@ -19,7 +19,7 @@ setup(
     long_description_content_type="text/markdown",
     classifiers=[
         "Programming Language :: Python :: Implementation :: CPython",
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Framework :: Django",
         "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3.7",

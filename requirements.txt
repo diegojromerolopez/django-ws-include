@@ -1,5 +1,5 @@
-beautifulsoup4==4.10.0
+beautifulsoup4>=4.10.0
 Django>=1.11.4
-jsonpickle==2.0.0
+jsonpickle>=2.0.0
 pycryptodome==3.10.1
 channels>=3.0.4
