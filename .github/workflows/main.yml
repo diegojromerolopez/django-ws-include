@@ -24,9 +24,13 @@ jobs:
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
           flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
       - name: Test with unittest
+        env:
+          DJANGO_SETTINGS_MODULE: ws_include.tests.settings
         run: |
-          DJANGO_SETTINGS_MODULE=ws_include.tests.settings python -m unittest discover -s ./ws_include/tests
+          python -m unittest discover -s ./ws_include/tests
       - name: Generate the coverage report
+        env:
+          DJANGO_SETTINGS_MODULE: ws_include.tests.settings
         run: |
           coverage run --source=ws_include/tests -m unittest
           coverage xml -o coverage.xml
