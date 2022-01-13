@@ -1,3 +1,4 @@
+import ast
 import json
 
 import jsonpickle
@@ -32,7 +33,7 @@ class TemplateGetter(WebsocketConsumer):
         replacements = {}
 
         # For each remote context value, we load it again
-        for context_object_name, context_object_load_params in context.items():
+        for context_object_name, context_object_load_params in json.loads(context).items():
             # Type of the value
             object_type = context_object_load_params['type']
 
@@ -50,7 +51,6 @@ class TemplateGetter(WebsocketConsumer):
                 model_object_as_str = '{0}-{1}-{2}'.format(
                     app_name, model_name, object_id
                 )
-                print(app_name, model_name, object_id)
                 if (
                         context_object_load_params['__checksum__'] !=
                         checksum.make(model_object_as_str)
@@ -68,25 +68,26 @@ class TemplateGetter(WebsocketConsumer):
                 app_name = context_object_load_params['app_name']
                 model_name = context_object_load_params['model']
                 model = apps.get_model(app_name, model_name)
-                params = context_object_load_params['params']
+                query_size = int(context_object_load_params['query_size'])
                 nonce = context_object_load_params['nonce']
                 tag = context_object_load_params['tag']
 
                 try:
                     # Decryption of the data
-                    raw_query = crypto.decrypt(
+                    raw_query_with_params = crypto.decrypt_from_base64_str(
                         key=settings.SECRET_KEY[:16],
                         nonce=nonce,
-                        encrypted_data=context_object_load_params['query'],
+                        encrypted_data=context_object_load_params['query_with_params'],
                         tag=tag
                     )
-
+                    raw_query = raw_query_with_params[:query_size]
+                    params = raw_query_with_params[query_size:]
                     # Loading the object and including it as a replacement
                     replacements[context_object_name] = model.objects.raw(
-                        raw_query, params
+                        raw_query, ast.literal_eval(params)
                     )
                 except ValueError:
-                    pass
+                    raise
 
             # If the value is a safe value,
             # we include it in the template replacements

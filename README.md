@@ -2,8 +2,11 @@
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/diegojromerolopez/django-ws-include/graphs/commit-activity)
-[![stability-beta](https://img.shields.io/badge/stability-beta-33bbff.svg)](https://github.com/mkenney/software-guides/blob/master/STABILITY-BADGES.md#beta)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/django-ws-include.svg)](https://pypi.python.org/pypi/django-ws-include/)
+[![PyPI version django-ws-include](https://badge.fury.io/py/django-ws-include.svg)](https://pypi.python.org/pypi/django-ws-include/)
+[![PyPI status](https://img.shields.io/pypi/status/django-ws-include.svg)](https://pypi.python.org/pypi/django-ws-include/)
+[![PyPI download month](https://img.shields.io/pypi/dm/django-ws-include.svg)](https://pypi.python.org/pypi/django-ws-include/)
 [![Maintainability](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/maintainability)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/25ec3d6c327ca2ef3ea1/test_coverage)](https://codeclimate.com/github/diegojromerolopez/django-ws-include/test_coverage)
 
@@ -14,10 +17,12 @@ in [Django](https://www.djangoproject.com/).
 
 ## How does this work?
 
-This library includes javascript code in the **ws_include** template_tag.
+This library includes javascript code in the **ws_include** template_tag
+and a static javascript file
+[ws_include.js](/ws_include/static/ws_include/ws_include.js) file
 
 That javascript code opens a websocket connection (WS_INCLUDE_WEBSOCKET)
-that sends a websocket message including the encrypted query and the block ID of
+that will send a websocket message including the encrypted query and the block ID of
 the template that must be loaded asynchronously.
 
 Later, the server responds with the rendered template and the corresponding block ID.
@@ -63,7 +68,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 from ws_include.routing import websocket_urlpatterns
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project.settings")
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
@@ -76,9 +81,15 @@ application = ProtocolTypeRouter({
 
 ```
 
+Add the static file to the header of your HTML base template file:
+
+```html
+<script type="text/javascript" src="{% static 'ws_include/ws_include.js' %}"></script>
+```
+
 ## Use
 
-Load the **ws_include** template tags at the top of your file and use the **ws_include**
+Load the **ws_include** template tags at the top of your template and use the **ws_include**
 template tag as a replacement of the django include template tag.
 
 You have to pass the local context explicitly to the async included templates, so you can pass all variables you
@@ -155,7 +166,7 @@ Customize the wrapper class by passing **html__tag__class** optional parameter t
 ```
 
 ## TODO
-* Tests.
+* More tests: test the Websocket Consumer code.
 * Improve documentation.
 
 ## Main author
