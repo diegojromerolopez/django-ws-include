@@ -29,6 +29,7 @@ setup(
         "Topic :: Software Development :: Libraries"
     ],
     install_requires=[
+        "Django>=4.0.1",
         "channels>=3.0.4",
         "pycryptodome>=3.10.1",
         "jsonpickle>=2.0.0"
