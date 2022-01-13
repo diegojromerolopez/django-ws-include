@@ -1,0 +1,11 @@
+<{{html__tag}}
+    id="{{block_id}}"
+    class="ws_included-block {{html__tag__class}}"
+    data-language_code="{{language_code}}"
+    data-template_path="{{template_path}}"
+    data-context='{{context|safe}}'
+>
+    {% if spinner__visible %}
+        {% include spinner__template_path %}
+    {% endif %}
+</{{html__tag}}>

@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import jsonpickle
 import uuid
 
@@ -43,7 +41,7 @@ def slugify_template_path(template_path):
 # loads the rendered template by using AJAX
 @register.simple_tag(takes_context=True)
 def ws_include(context, template_path, *args, **kwargs):
-    t = loader.get_template('ws_include/template_tag.html')
+    t = loader.get_template('ws_include/template_tags/ws_include.html')
 
     # Slugified template path. It will be used in the block_id and
     # as a class of this block
@@ -117,16 +115,15 @@ def ws_include(context, template_path, *args, **kwargs):
 
             sql_query, params = context_object.query.sql_with_params()
 
-            nonce, encrypted_sql, tag = crypto.encrypt(
-                key=settings.SECRET_KEY[:16], data=sql_query
+            nonce, encrypted_sql_with_params, tag = crypto.encrypt_to_base64_str(
+                key=settings.SECRET_KEY[:16], data=sql_query+str(params)
             )
-
             replacements['context'][context_object_name] = {
                 'type': 'QuerySet',
-                'query': encrypted_sql.decode('latin-1'),
-                'params': params,
-                'nonce': nonce.decode('latin-1'),
-                'tag': tag.decode('latin-1'),
+                'query_with_params': encrypted_sql_with_params,
+                'query_size': len(sql_query),
+                'nonce': nonce,
+                'tag': tag,
                 'app_name': app_name,
                 'model': model_name,
             }
