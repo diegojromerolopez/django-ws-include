@@ -14,10 +14,12 @@ in [Django](https://www.djangoproject.com/).
 
 ## How does this work?
 
-This library includes javascript code in the **ws_include** template_tag.
+This library includes javascript code in the **ws_include** template_tag
+and a static javascript file
+[ws_include.js](/ws_include/static/ws_include/ws_include.js) file
 
 That javascript code opens a websocket connection (WS_INCLUDE_WEBSOCKET)
-that sends a websocket message including the encrypted query and the block ID of
+that will send a websocket message including the encrypted query and the block ID of
 the template that must be loaded asynchronously.
 
 Later, the server responds with the rendered template and the corresponding block ID.
@@ -63,7 +65,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 from ws_include.routing import websocket_urlpatterns
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'your_project.settings')
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project.settings")
 
 application = ProtocolTypeRouter({
     "http": get_asgi_application(),
@@ -76,9 +78,15 @@ application = ProtocolTypeRouter({
 
 ```
 
+Add the static file to the header of your HTML base template file:
+
+```html
+<script type="text/javascript" src="{% static 'ws_include/ws_include.js' %}"></script>
+```
+
 ## Use
 
-Load the **ws_include** template tags at the top of your file and use the **ws_include**
+Load the **ws_include** template tags at the top of your template and use the **ws_include**
 template tag as a replacement of the django include template tag.
 
 You have to pass the local context explicitly to the async included templates, so you can pass all variables you
@@ -155,7 +163,7 @@ Customize the wrapper class by passing **html__tag__class** optional parameter t
 ```
 
 ## TODO
-* Tests.
+* More tests: test the Websocket Consumer code.
 * Improve documentation.
 
 ## Main author
