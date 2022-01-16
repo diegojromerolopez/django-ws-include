@@ -108,7 +108,38 @@ There is also a repository with a full example that also uses django-async-inclu
 [django-async-include-example](https://github.com/diegojromerolopez/django-async-include-example).
 
 ### Warning and limitations
-See [django-async-include](https://github.com/diegojromerolopez/django-async-include) warnings and limitations.
+
+#### Object dynamic attributes
+No dynamic attribute will be passed to the templates given that only a reference to it is passed
+from the caller to the included template callee.
+
+**Don't use dynamic attributes inside an async_included template**.
+
+However, the full object will be passed to the template,
+so you could call its methods and properties without any problem.
+
+#### QuerySets
+Each QuerySet is passed as encrypted SQL and converted on the receiver to a RawQuerySet.
+
+Note that RawQuerySets have no len method so length filter returns always 0.
+
+**Load ws_included_length in your template and use the filter **ws_included_length** to get the length.
+
+````html
+{# Partial HTML template file to be loaded by websockets #}
+{% load ws_included_length %}
+
+<div>
+    <h2>Product list (items|ws_included_length)</h2>
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item.name }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+````
 
 ## Examples
 
